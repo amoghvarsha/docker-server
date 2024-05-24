@@ -5,8 +5,8 @@ services:
     container_name: vaultwarden
     hostname: vaultwarden
     env_file:
-      - ../env/vaultwarden/vaultwarden.env
-      - ../env/vaultwarden/vaultwarden-secrets.env
+      - ../../env/vaultwarden/vaultwarden.env
+      - ../../env/vaultwarden/vaultwarden-secrets.env
     volumes:
       - vaultwarden-data:/data:rw
       - /var/log/docker/vaultwarden:/log:rw
@@ -28,7 +28,7 @@ services:
     container_name: vaultwarden-backup
     hostname: vaultwarden-backup
     env_file:
-      - ../env/vaultwarden/vaultwarden-backup-secrets.env
+      - ../../env/vaultwarden/vaultwarden-backup-secrets.env
     volumes:
       - ../backup/scripts:/app/lib:rw
       - vaultwarden-data:/data:rw

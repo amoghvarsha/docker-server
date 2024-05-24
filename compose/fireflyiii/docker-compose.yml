@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   fireflyiii:
     image: fireflyiii/core:latest
@@ -7,8 +5,8 @@ services:
     container_name: fireflyiii
     hostname: fireflyiii
     env_file:
-      - ../env/fireflyiii/fireflyiii.env
-      - ../env/fireflyiii/fireflyiii-secrets.env
+      - ../../env/fireflyiii/fireflyiii.env
+      - ../../env/fireflyiii/fireflyiii-secrets.env
     environment:
       - TRUSTED_PROXIES=**
     volumes:
@@ -32,7 +30,7 @@ services:
     container_name: fireflyiii-db
     hostname: fireflyiii-db
     env_file:
-      - ../env/fireflyiii/fireflyiii-db-secrets.env
+      - ../../env/fireflyiii/fireflyiii-db-secrets.env
     volumes:
       - fireflyiii-db:/var/lib/mysql:rw
     networks:
@@ -50,7 +48,7 @@ services:
     container_name: fireflyiii-backup
     hostname: fireflyiii-backup
     env_file:
-      - ../env/fireflyiii-backup-secrets.env
+      - ../../env/fireflyiii/fireflyiii-backup-secrets.env
     volumes:
       - ../backup/scripts:/app/lib:rw
       - fireflyiii-upload:/data/upload:rw

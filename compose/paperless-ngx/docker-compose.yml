@@ -5,8 +5,8 @@ services:
     container_name: paperless-ngx
     hostname: paperless-ngx
     env_file:
-      - ../env/paperless-ngx/paperless-ngx.env
-      - ../env/paperless-ngx/paperless-ngx-secrets.env
+      - ../../env/paperless-ngx/paperless-ngx.env
+      - ../../env/paperless-ngx/paperless-ngx-secrets.env
     environment:
       PAPERLESS_REDIS: redis://paperless-broker:6379
       PAPERLESS_TIKA_ENABLED: 1
