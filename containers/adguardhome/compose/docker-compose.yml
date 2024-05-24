@@ -1,0 +1,41 @@
+services:
+  adguard:
+    image: adguard/adguardhome
+    restart: always
+    container_name: adguardhome
+    hostname: adguardhome
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - adguardhome-work:/opt/adguardhome/work
+      - ../conf/:/opt/adguardhome/conf
+    ports:
+      - 192.168.1.12:8082:80/tcp
+
+      - 192.168.1.12:53:53/tcp
+      - 192.168.1.12:53:53/udp
+
+      - 192.168.1.12:443:433/tcp
+      - 192.168.1.12:443:433/udp
+
+      - 192.168.1.12:6060:6060/tcp
+
+      - 192.168.1.12:3000:3000/tcp
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.30
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+networks:
+  bridge:
+    external: true
+    name: docker-bridge
+
+volumes:
+  adguardhome-work:
+    external: true
+    name: adguardhome-work

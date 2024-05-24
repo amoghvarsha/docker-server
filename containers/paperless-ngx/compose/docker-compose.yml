@@ -1,0 +1,103 @@
+version: '3.9'
+
+services:
+  paperless-webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    container_name: paperless-ngx
+    hostname: paperless-ngx
+    env_file:
+      - ../env/paperless-ngx.env
+      - ../env/paperless-ngx-secrets.env
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://paperless-tika:9998
+    volumes:
+      - paperless-data:/usr/src/paperless/data:rw
+      - paperless-media:/usr/src/paperless/media:rw
+      - ../export:/usr/src/paperless/export:rw
+      - ../consume:/usr/src/paperless/consume:rw
+    ports:
+      - "192.168.1.12:8083:8000"
+    depends_on:
+      - paperless-broker
+      - paperless-gotenberg
+      - paperless-tika
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.40
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+  paperless-broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    container_name: paperless-broker
+    hostname: paperless-broker
+    volumes:
+      - paperless-redisdata:/data
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.41
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+  paperless-gotenberg:
+    image: docker.io/gotenberg/gotenberg:7.10
+    restart: unless-stopped
+    container_name: paperless-gotenberg
+    hostname: paperless-gotenberg
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.42
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+  paperless-tika:
+    image: ghcr.io/paperless-ngx/tika:latest
+    restart: unless-stopped
+    container_name: paperless-tika
+    hostname: paperless-tika
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.43
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+networks:
+  bridge:
+    external: true
+    name: docker-bridge
+
+volumes:
+  paperless-data:
+    external: true
+    name: paperless-data
+
+  paperless-media:
+    external: true
+    name: paperless-media
+
+  paperless-redisdata:
+    external: true
+    name: paperless-redisdata

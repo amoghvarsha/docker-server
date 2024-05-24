@@ -1,0 +1,60 @@
+# Ignore the Dockerfile (optional, if you don't want to version control it)
+# Dockerfile
+
+# Ignore Docker Compose files (optional, if you don't want to version control them)
+# docker-compose.yml
+# docker-compose.override.yml
+
+# Ignore Docker image tarballs
+*.tar
+
+# Ignore Docker log files
+docker-logs/
+*.log
+
+# Ignore volumes
+volumes/
+
+# Ignore Docker volumes
+docker-volumes/
+
+# Ignore Docker container runtime files
+docker-containers/
+
+# Ignore Docker related directories
+.docker/
+.dockerignore
+
+# Ignore temporary build files
+tmp/
+temp/
+
+# Ignore node_modules (if using Node.js)
+node_modules/
+
+# Ignore Python virtual environments (if using Python)
+venv/
+__pycache__/
+*.pyc
+
+# Ignore environment variable files
+
+# Ignore specific secret files
+*-secrets.env
+
+# Ignore output directories
+dist/
+build/
+target/
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.swp
+
+# Ignore other common files
+.DS_Store
+Thumbs.db
+
+# Ignore files related to CI/CD
+.ci/

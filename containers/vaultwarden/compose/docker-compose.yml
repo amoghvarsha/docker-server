@@ -1,0 +1,62 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    restart: always
+    container_name: vaultwarden
+    hostname: vaultwarden
+    env_file:
+      - ../env/vaultwarden.env
+      - ../env/vaultwarden-secrets.env
+    volumes:
+      - vaultwarden-data:/data:rw
+      - /var/log/docker/vaultwarden:/log:rw
+    ports:
+      - 192.168.1.12:8080:80
+      - 192.168.1.12:3012:3012
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.10
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+  vaultwarden-backup:
+    image: backup:latest
+    restart: always
+    container_name: vaultwarden-backup
+    hostname: vaultwarden-backup
+    env_file:
+      - ../env/vaultwarden-backup-secrets.env
+    volumes:
+      - ../backup/scripts:/app/lib:rw
+      - vaultwarden-data:/data:rw
+      - backup-rclone-config:/root/.config/rclone:rw
+      - backup-gpg-config:/root/.gnupg:rw
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.11
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+networks:
+  bridge:
+    external: true
+    name: docker-bridge
+
+volumes:
+  vaultwarden-data:
+    external: true
+    name: vaultwarden-data
+
+  backup-rclone-config:
+    external: true
+    name: backup-rclone-config
+
+  backup-gpg-config:
+    external: true
+    name: backup-gpg-config
