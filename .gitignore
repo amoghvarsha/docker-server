@@ -37,15 +37,8 @@ venv/
 __pycache__/
 *.pyc
 
-# Ignore environment variable files
-
 # Ignore specific secret files
 *-secrets.env
-
-# Ignore output directories
-dist/
-build/
-target/
 
 # Ignore IDE specific files
 .vscode/
