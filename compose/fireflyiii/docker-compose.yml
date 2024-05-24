@@ -7,8 +7,8 @@ services:
     container_name: fireflyiii
     hostname: fireflyiii
     env_file:
-      - ../env/fireflyiii.env
-      - ../env/fireflyiii-secrets.env
+      - ../env/fireflyiii/fireflyiii.env
+      - ../env/fireflyiii/fireflyiii-secrets.env
     environment:
       - TRUSTED_PROXIES=**
     volumes:
@@ -32,7 +32,7 @@ services:
     container_name: fireflyiii-db
     hostname: fireflyiii-db
     env_file:
-      - ../env/fireflyiii-db-secrets.env
+      - ../env/fireflyiii/fireflyiii-db-secrets.env
     volumes:
       - fireflyiii-db:/var/lib/mysql:rw
     networks:
