@@ -20,9 +20,13 @@ create_volume() {
                 echo "Invalid choice. Skipping volume ${volume_name}."
             ;;
         esac
+        echo ""
+
     else
     docker volume create "${volume_name}"
     echo "Volume ${volume_name} created."
+    echo ""
+    
   fi
 }
 
@@ -34,8 +38,8 @@ create_volume "backup-rclone-config"
 create_volume "backup-gpg-config"
 
 # Docker volumes for Firefly III database and configuration
-create_volume "fireflyIII-db"
-create_volume "fireflyIII-upload"
+create_volume "fireflyiii-db"
+create_volume "fireflyiii-upload"
 
 # Docker volumes for Paperless-ngx
 create_volume "paperless-data"
