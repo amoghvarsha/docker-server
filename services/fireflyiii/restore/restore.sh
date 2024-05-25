@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker run --rm -it                               \
-  --env-file ../env/fireflyiii-backup.env         \
+  --env-file ../../../../docker-server-private/env/fireflyiii/fireflyiii-backup-secrets.env \
   -v ./scripts:/app/lib:rw                        \
   -v fireflyiii-db:/data/db:rw                    \
   -v fireflyiii-upload:/data/upload:rw            \
