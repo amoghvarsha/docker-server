@@ -9,6 +9,9 @@ services:
       - ../../../docker-server-private/env/fireflyiii/fireflyiii-secrets.env
     environment:
       - TRUSTED_PROXIES=**
+      - DB_CONNECTION=mysql
+      - DB_HOST=fireflyiii-db
+      - DB_PORT=3306
     volumes:
       - fireflyiii-upload:/var/www/html/storage/upload:rw
     ports:
