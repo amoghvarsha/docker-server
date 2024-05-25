@@ -5,8 +5,8 @@ services:
     container_name: paperless-ngx
     hostname: paperless-ngx
     env_file:
-      - ../../env/paperless-ngx/paperless-ngx.env
-      - ../../env/paperless-ngx/paperless-ngx-secrets.env
+      - ./paperless-ngx.env
+      - ../../../docker-server-private/env/paperless-ngx/paperless-ngx-secrets.env
     environment:
       PAPERLESS_REDIS: redis://paperless-broker:6379
       PAPERLESS_TIKA_ENABLED: 1
@@ -15,8 +15,8 @@ services:
     volumes:
       - paperless-data:/usr/src/paperless/data:rw
       - paperless-media:/usr/src/paperless/media:rw
-      - ../export:/usr/src/paperless/export:rw
-      - ../consume:/usr/src/paperless/consume:rw
+      - ./export:/usr/src/paperless/export:rw
+      - ./consume:/usr/src/paperless/consume:rw
     ports:
       - "192.168.1.12:8083:8000"
     depends_on:

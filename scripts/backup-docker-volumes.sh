@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the absolute path to the backup directory
-BACKUP_DIR=$(realpath ../volumes/backup)
+BACKUP_DIR=$(realpath ../../docker-server-private/volumes/backup)
 
 # Function to backup a Docker volume
 backup_volume() {
