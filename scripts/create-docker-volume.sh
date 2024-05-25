@@ -30,12 +30,12 @@ create_volume() {
   fi
 }
 
-# Docker volumes for AdGuard Home
-create_volume "adguardhome-work"
-
 # Docker volumes for Rclone and GnuPG configuration
 create_volume "backup-rclone-config"
 create_volume "backup-gpg-config"
+
+# Docker volumes for AdGuard Home
+create_volume "adguardhome-work"
 
 # Docker volumes for Firefly III database and configuration
 create_volume "fireflyiii-db"
