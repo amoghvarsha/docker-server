@@ -13,6 +13,8 @@ services:
     ports:
       - 192.168.1.12:8080:80
       - 192.168.1.12:3012:3012
+    depends_on:
+      - vaultwarden-backup
     networks:
       bridge:
         ipv4_address: 192.168.10.10
