@@ -1,0 +1,24 @@
+services:
+  ddns-updater:
+    image: ddns-updater:latest
+    restart: always
+    container_name: ddns-updater
+    hostname: ddns-updater
+    environment:
+      - ENV_DIR=/app/env.d
+      - TIMEZONE=America/New_York
+    volumes:
+      - ../../../docker-server-private/env/ddns-updater:/app/env.d:rw
+    networks:
+      bridge:
+        ipv4_address: 192.168.10.50
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+
+networks:
+  bridge:
+    external: true
+    name: docker-bridge
