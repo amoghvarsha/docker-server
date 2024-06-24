@@ -1,6 +1,6 @@
 services:
   paperless-webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:1.16.5
     restart: unless-stopped
     container_name: paperless-ngx
     hostname: paperless-ngx
