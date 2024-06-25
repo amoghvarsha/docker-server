@@ -1,9 +1,11 @@
-# Run the following command to open an bash terminal for configuring rclone and gpg configuration after creating volumes
+# Run the following commands to open an bash terminal for configuring rclone and gpg configuration after creating volumes
 
-docker run --rm -it        \
-    --entrypoint /bin/bash \
-    -v backup:/root/:rw    \
-    backup/latest:1.0
+# Run 
+docker run --rm -it                                  \
+    --entrypoint /bin/bash                           \
+    -v backup-rclone-config:/root/.config/rclone:rw  \
+    -v backup-gpg-config:/root/.gnupg:rw             \
+    backup:latest
 
 # Run
 gpg --full-generate-key
