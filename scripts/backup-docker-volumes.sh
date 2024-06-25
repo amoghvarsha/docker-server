@@ -55,7 +55,7 @@ main() {
         1)
             # Backup Docker volumes
             echo "Backing up Docker volumes..."
-            VOLUMES=$(docker volume ls --format '{{.Name}}' | tail -n +2)
+            VOLUMES=$(docker volume ls --format '{{.Name}}' | tail -n +1)
             for volume_name in $VOLUMES; do
                 backup_volume "$volume_name"
             done
@@ -63,7 +63,7 @@ main() {
         2)
             # Restore Docker volumes
             echo "Restoring Docker volumes..."
-            VOLUMES=$(docker volume ls --format '{{.Name}}' | tail -n +2)
+            VOLUMES=$(docker volume ls --format '{{.Name}}' | tail -n +1)
             for volume_name in $VOLUMES; do
                 restore_volume "$volume_name"
             done
