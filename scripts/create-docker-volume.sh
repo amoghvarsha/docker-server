@@ -7,16 +7,16 @@ create_volume() {
         echo "Volume ${volume_name} already exists."
 
         read -p "Do you want to delete the existing volume and create a new one? (y/n): " choice
-        case "$choice" in 
-            y|Y ) 
+        case "$choice" in
+            y|Y )
                 docker volume rm "${volume_name}"
                 docker volume create "${volume_name}"
                 echo "Volume ${volume_name} deleted and created."
             ;;
-            n|N ) 
+            n|N )
                 echo "Volume ${volume_name} was not deleted."
             ;;
-            * ) 
+            * )
                 echo "Invalid choice. Skipping volume ${volume_name}."
             ;;
         esac
@@ -26,7 +26,7 @@ create_volume() {
     docker volume create "${volume_name}"
     echo "Volume ${volume_name} created."
     echo ""
-    
+
   fi
 }
 
@@ -48,3 +48,6 @@ create_volume "paperless-redisdata"
 
 # Docker volume for Vaultwarden database
 create_volume "vaultwarden-data"
+
+# Docker volume for linkding
+create_volume "linkding-data"
